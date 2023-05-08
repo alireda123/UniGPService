@@ -37,81 +37,81 @@ app.use('/register', registerRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-function createTables(database) {
-    database.exec(`
-   CREATE TABLE IF NOT EXISTS "Appointments" (
-	"appointmentID"	TEXT,
-	"appointmentTime"	TEXT,
-	"PatientID"	TEXT,
-	"appointmentDate"	INTEGER,
-	"appointmentReason"	TEXT,
-	"PrescriptionGiven"	TEXT,
-	"DoctorID"	TEXT,
-	"NHSNumber"	TEXT,
-	PRIMARY KEY("appointmentID")
-);
-CREATE TABLE IF NOT EXISTS "Doctor" (
-	"FirstName"	TEXT,
-	"Surname"	TEXT,
-	"yearsAtSurgery"	TEXT,
-	"staffID"	TEXT,
-	"DOB"	TEXT,
-	"postcode"	TEXT,
-	"Full_Address"	TEXT,
-	"DoctorID"	TEXT,
-	"qualifications"	TEXT,
-	PRIMARY KEY("DoctorID")
-);
-CREATE TABLE IF NOT EXISTS "Receptionist" (
-	"FirstName"	TEXT,
-	"Surname"	TEXT,
-	"yearsAtSurgery"	TEXT,
-	"staffID"	TEXT,
-	"DOB"	TEXT,
-	"address"	TEXT,
-	"postcode"	TEXT,
-	"ReceptionistID"	TEXT,
-	PRIMARY KEY("ReceptionistID")
-);
-CREATE TABLE IF NOT EXISTS "Patient" (
-	"FirstName"	TEXT,
-	"Surname"	TEXT,
-	"Age"	INTEGER,
-	"Address"	TEXT,
-	"DOB"	TEXT,
-	"postcode"	TEXT,
-	"Gender"	TEXT,
-	"NHSNumber"	TEXT,
-  PRIMARY KEY("NHSNumber")
-);
-CREATE TABLE IF NOT EXISTS Records (
-  appointmentID TEXT , 
-  NHSNumber TEXT PRIMARY KEY);
+// function createTables(database) {
+//     database.exec(`
+//    CREATE TABLE IF NOT EXISTS "Appointments" (
+// 	"appointmentID"	TEXT,
+// 	"appointmentTime"	TEXT,
+// 	"PatientID"	TEXT,
+// 	"appointmentDate"	INTEGER,
+// 	"appointmentReason"	TEXT,
+// 	"PrescriptionGiven"	TEXT,
+// 	"DoctorID"	TEXT,
+// 	"NHSNumber"	TEXT,
+// 	PRIMARY KEY("appointmentID")
+// );
+// CREATE TABLE IF NOT EXISTS "Doctor" (
+// 	"FirstName"	TEXT,
+// 	"Surname"	TEXT,
+// 	"yearsAtSurgery"	TEXT,
+// 	"staffID"	TEXT,
+// 	"DOB"	TEXT,
+// 	"postcode"	TEXT,
+// 	"Full_Address"	TEXT,
+// 	"DoctorID"	TEXT,
+// 	"qualifications"	TEXT,
+// 	PRIMARY KEY("DoctorID")
+// );
+// CREATE TABLE IF NOT EXISTS "Receptionist" (
+// 	"FirstName"	TEXT,
+// 	"Surname"	TEXT,
+// 	"yearsAtSurgery"	TEXT,
+// 	"staffID"	TEXT,
+// 	"DOB"	TEXT,
+// 	"address"	TEXT,
+// 	"postcode"	TEXT,
+// 	"ReceptionistID"	TEXT,
+// 	PRIMARY KEY("ReceptionistID")
+// );
+// CREATE TABLE IF NOT EXISTS "Patient" (
+// 	"FirstName"	TEXT,
+// 	"Surname"	TEXT,
+// 	"Age"	INTEGER,
+// 	"Address"	TEXT,
+// 	"DOB"	TEXT,
+// 	"postcode"	TEXT,
+// 	"Gender"	TEXT,
+// 	"NHSNumber"	TEXT,
+//   PRIMARY KEY("NHSNumber")
+// );
+// CREATE TABLE IF NOT EXISTS Records (
+//   appointmentID TEXT , 
+//   NHSNumber TEXT PRIMARY KEY);
   
-  CREATE TABLE vaccines (
-  NHSNumber TEXT NOT NULL,
-  DoseNo int NOT NULL,
-  VaccinationDate date NOT NULL,
-  VaccineManufacturer text NOT NULL,
-  DiseaseTargeted text NOT NULL,
-  VaccineType text NOT NULL,
-  Product text NOT NULL,
-  VaccineBatchNumber text NOT NULL,
-  CountryOfVaccination text NOT NULL,
-  Authority text NOT NULL,
-  Site text NOT NULL,
-  TotalSeriesOfDoses int NOT NULL,
-  DisplayName text NOT NULL,
-  SnomedCode int NOT NULL,
-  DateEntered date NOT NULL,
-  ProcedureCode int NOT NULL,
-  Booster tinyint(1) NOT NULL,
-  PRIMARY KEY (NHSNumber,DoseNo),
-  CONSTRAINT vaccines_ibfk_1 FOREIGN KEY (NHSNumber) REFERENCES patients (NHSNumber)
-)
-        `
-    );
-}
+//   CREATE TABLE vaccines (
+//   NHSNumber TEXT NOT NULL,
+//   DoseNo int NOT NULL,
+//   VaccinationDate date NOT NULL,
+//   VaccineManufacturer text NOT NULL,
+//   DiseaseTargeted text NOT NULL,
+//   VaccineType text NOT NULL,
+//   Product text NOT NULL,
+//   VaccineBatchNumber text NOT NULL,
+//   CountryOfVaccination text NOT NULL,
+//   Authority text NOT NULL,
+//   Site text NOT NULL,
+//   TotalSeriesOfDoses int NOT NULL,
+//   DisplayName text NOT NULL,
+//   SnomedCode int NOT NULL,
+//   DateEntered date NOT NULL,
+//   ProcedureCode int NOT NULL,
+//   Booster tinyint(1) NOT NULL,
+//   PRIMARY KEY (NHSNumber,DoseNo),
+//   CONSTRAINT vaccines_ibfk_1 FOREIGN KEY (NHSNumber) REFERENCES patients (NHSNumber)
+// )
+//         `
+//     );
+// }
 
 let vaccinedb = new sqlite3.Database('vaccines.db', (err) => {
   if(err){
@@ -126,9 +126,5 @@ if(err){
   console.log("connected to GP database")
   
 }) 
-if(gpdb !==undefined){
-  createTables(gpdb)
-}
-
-
-module.exports = app;
+const y = {vaccinedb, gpdb}
+module.exports = app, y

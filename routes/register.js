@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const mysql = require('mysql')
 var sqlite3 = require('sqlite3').verbose();
+
+
 // const connection = mysql.createConnection({
 //   host: '127.0.0.1',
 //   user: 'root',
@@ -9,28 +11,27 @@ var sqlite3 = require('sqlite3').verbose();
 //   database: 'vaccinesDB'
 // })
 
-
-
-
-
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.status().send()
-  
-});
-let vaccinedb = new sqlite3.Database('vaccines.db', (err) => { //how to connect database taken from https://www.youtube.com/watch?v=CBWtETJ0LUY
+let vaccinedb = new sqlite3.Database('vaccines.db', (err) => {
   if(err){
     console.error(err.message);
   }
   console.log("connected to GP database")
 })
 let gpdb = new sqlite3.Database('tryingout.db', (err) => {
-  if(err){
+if(err){
     console.error(err.message);
   }
-  console.log("Connected to the file gp database agian aigsn igosndiosg n.")
-})
+  console.log("connected to GP database")
+  
+}) 
+
+
+
+
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  res.send("good")})
+
 
 
 router.post('/', function(req, res, next) {
@@ -41,10 +42,15 @@ router.post('/', function(req, res, next) {
     //do query with others
     
   } else{
-    gpdb.all(`select * from Patient where NHSNumber = ${Nhsnumber}`, (err,rows)=>{
+    vaccinedb.all(`select * from patients where NHSNumber = ${Nhsnumber}`, (err,rows)=>{
       if(err){
         throw err;
       } if(rows.length > 0){
+
+        let vaccineRows;
+        embed()
+        console.log(embed(Nhsnumber))
+        
         res.send({validation:true})
       } else{
         res.send({validation:false})
@@ -63,5 +69,19 @@ router.post('/', function(req, res, next) {
   }
   
 });
+
+function embed(Nhsnumber){
+    let x;
+    vaccinedb.all(`select * from vaccines where NHSNumber = ${Nhsnumber}`, (err,rows)=>{
+      if(err){ throw err}  
+      if(rows.length > 0){
+              x = rows
+          }
+          else{
+            res.send({validation:false})
+          }
+        });
+        return x
+}
 
 module.exports = router;

@@ -36,21 +36,4 @@ router.post('/', function(req, res, next) {
 
 module.exports = router;
 
-// BEGIN;
 
-// -- Table: Appointments
-// CREATE TABLE Appointments (appointmentID text PRIMARY KEY, appointmentTime text, PatientID text, appointmentDate text, appointmentReason text, PrescriptionsGiven text, DoctorID text REFERENCES Doctor (DoctorID), NHSNumber text);
-
-// -- Table: Doctor
-// CREATE TABLE Doctor (FirstName text, Surname text, yearsAtSurgery text, staffID text, DOB DATE, postcode text, Full_Address text, DoctorID text PRIMARY KEY, qualifications text);
-
-// -- Table: Patient
-// CREATE TABLE Patient (FirstName text, Surname text, staffID text, DOB DATE, postcode text, Full_Address text, DoctorID text PRIMARY KEY, qualifications text);
-
-// -- Table: Receptionist
-// CREATE TABLE Receptionist (FirstName text, Surname text, yearsAtSurgery text, staffID text, DOB DATE, address text, postcode text, Full_Address text, ReceptionistID text PRIMARY KEY);
-
-// -- Table: Records
-// CREATE TABLE Records (appointmentID text PRIMARY KEY, appointmentTime text, PatientID text, appointmentDate DATE, appointmentReason text, PrescriptionsGiven text, DoctorID text REFERENCES Doctor (DoctorID), NHSNumber text);
-
-// COMMIT;
