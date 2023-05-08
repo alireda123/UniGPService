@@ -1,10 +1,35 @@
 import { Button, Page, BackLink, InputField, H1, H2, SectionBreak } from "govuk-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios"
 import "./SignIn.css";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useNavigate();
+  const signInPayload = {
+    email,
+    password
+  }
+
+  const sendNHSnumber = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost:3000/signin", signInPayload).then(res => {
+      if(res.data.validation){
+        if(res.data.role==="patient"){
+            history("/patient")
+
+        } else if(res.data.role==="doctor"){
+            history("/doctor")
+
+        } else if(res.data.role==="receptionist"){
+            history("/patient")
+
+        }
+      }
+    })
+  }
 
   return (
     <div className="App">

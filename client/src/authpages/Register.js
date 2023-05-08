@@ -24,7 +24,7 @@ function Register() {
 
   const sendNHSnumber = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3000/register", registerPayload).then(res => setUserExists(res.data))
+    axios.post("http://localhost:3000/register", registerPayload).then(res => {setUserExists(res.data); console.log(res)})
   }
   
 

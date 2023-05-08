@@ -9,6 +9,12 @@ import {
 } from "react-router-dom";
 import Register from './authpages/Register';
 import SignIn from './authpages/SignIn';
+import DoctorHome from "./PagesByRoles/Doctor/Home"
+import PatientHome from "./PagesByRoles/Patient/Home"
+import ReceptionistHome from './PagesByRoles/Receptionist/Home';
+import DoctorAppointments from './PagesByRoles/Doctor/Appointments';
+import PatientAppointments from './PagesByRoles/Patient/Appointments';
+import ReceptionistAppointments from './PagesByRoles/Receptionist/Appointments';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +28,30 @@ const router = createBrowserRouter([
    {
     path: "/SignIn",
     element: <SignIn/>,
+  },
+  {
+    path: "/doctor",
+    element: <DoctorHome/>,
+  },
+  {
+    path: "/receptionist",
+    element: <ReceptionistHome/>,
+  },
+  {
+    path: "/patient",
+    element: <PatientHome/>,
+  },
+  {
+    path: "/patient/appointments",
+    element: <PatientAppointments/>,
+  },
+  {
+    path: "/doctor/appointments",
+    element: <DoctorAppointments/>,
+  },
+  {
+    path: "/receptionist/appointments",
+    element: <ReceptionistAppointments/>,
   },
 ]);
 
