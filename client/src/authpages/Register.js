@@ -1,6 +1,7 @@
 import "./Register.css";
 import { Page, BackLink, H1, InputField, Button, h2, H3 } from "govuk-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios"
 
 function Register() {
@@ -21,10 +22,10 @@ function Register() {
     secondName,
     postcode,
   }
-
+const nav = useNavigate()
   const sendNHSnumber = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3000/register", registerPayload).then(res => {setUserExists(res.data); console.log(res)})
+    axios.post("http://localhost:3000/register", registerPayload).then(res => {if(res.data.validation ===true){nav("/SignIn")}})
   }
   
 

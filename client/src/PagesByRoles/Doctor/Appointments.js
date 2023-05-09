@@ -10,7 +10,7 @@ function DoctorAppointments() {
       <Page beforeChildren={<BackLink href="/doctor">Back</BackLink>}>
 
         <H1>View Appointments</H1>
-        <hr class="govuk-section-break govuk-section-break--visible"></hr>
+        <hr className="govuk-section-break govuk-section-break--visible"></hr>
         <LeadParagraph>Below are your appointments </LeadParagraph>
         <Table>Date and time</Table>
 

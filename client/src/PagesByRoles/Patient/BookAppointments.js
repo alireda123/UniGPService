@@ -6,7 +6,7 @@ function BookAppointments() {
 
   return (
     <div className="doctorHome">
-      <Page beforeChildren={<BackLink href="/doctor">Back</BackLink>}>
+      <Page beforeChildren={<BackLink href="/Patient">Back</BackLink>}>
 
         <H1>Book your appointments</H1>
           <hr class="govuk-section-break govuk-section-break--visible"></hr>

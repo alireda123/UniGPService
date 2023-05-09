@@ -1,3 +1,4 @@
+const e = require('express');
 var express = require('express');
 var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
@@ -8,7 +9,7 @@ let vaccinedb = new sqlite3.Database('vaccines.db', (err) => {
   }
   console.log("connected to GP database")
 })
-let gpdb = new sqlite3.Database('tryingout.db', (err) => {
+let gpdb = new sqlite3.Database('gp.db', (err) => {
 if(err){
     console.error(err.message);
   }
@@ -24,21 +25,28 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
-  const {email, password} = req.body
-  console.log(email, password)
-  if(Nhsnumber===""){
-    //do query with others
+  const {userName, password} = req.body
+ 
+  if(userName === "" || password === ""){
+    res.send({validation:false})
     
   } else{
-    //perform query, if query returns null, then res.send(false)
-    // connection.connect()
-    // connection.query("SELECT *", (err, rows, fields) => {
-    //   if (err) throw err
-    // })
-    // connection.end()
-  }
+
+ 
   
+  // result == true or result == false
+    const y = gpdb.all(`select * from credentials where username = ${userName}`)
+       
+        console.log(y)
+bcrypt.compare(password, hash, (err, res) => {
+  // res == true or res == false
 });
+          
+        res.send({validation:true})
+        
+      
+  }})
+
 
 module.exports = router;
 

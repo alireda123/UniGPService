@@ -29,7 +29,7 @@ app.use(cors({                    //this app.use was taken from https://blog.log
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/signin', usersRouter);
 app.use('/register', registerRouter);
 
 
@@ -47,84 +47,88 @@ const x = new sqlite3.Database("gp.db", (err) => {
   }
   console.log("connected to GP database");
 });
+//createTables(x)
 
 
+// function createTables(database) {
+//     database.exec(`
+//    CREATE TABLE IF NOT EXISTS "Appointments" (
+// 	"appointmentID"	TEXT,
+// 	"appointmentTime"	TEXT,
+// 	"PatientID"	TEXT,
+// 	"appointmentDate"	INTEGER,
+// 	"appointmentReason"	TEXT,
+// 	"PrescriptionGiven"	TEXT,
+// 	"DoctorID"	TEXT,
+// 	"NHSNumber"	TEXT,
+// 	PRIMARY KEY("appointmentID")
+// );
+// CREATE TABLE IF NOT EXISTS "credentials" (
+// 	"username"	TEXT,
+// 	"password"	TEXT);
 
-function createTables(database) {
-    database.exec(`
-   CREATE TABLE IF NOT EXISTS "Appointments" (
-	"appointmentID"	TEXT,
-	"appointmentTime"	TEXT,
-	"PatientID"	TEXT,
-	"appointmentDate"	INTEGER,
-	"appointmentReason"	TEXT,
-	"PrescriptionGiven"	TEXT,
-	"DoctorID"	TEXT,
-	"NHSNumber"	TEXT,
-	PRIMARY KEY("appointmentID")
-);
-CREATE TABLE IF NOT EXISTS "Doctor" (
-	"FirstName"	TEXT,
-	"Surname"	TEXT,
-	"yearsAtSurgery"	TEXT,
-	"staffID"	TEXT,
-	"DOB"	TEXT,
-	"postcode"	TEXT,
-	"Full_Address"	TEXT,
-	"DoctorID"	TEXT,
-	"qualifications"	TEXT,
-	PRIMARY KEY("DoctorID")
-);
-CREATE TABLE IF NOT EXISTS "Receptionist" (
-	"FirstName"	TEXT,
-	"Surname"	TEXT,
-	"yearsAtSurgery"	TEXT,
-	"staffID"	TEXT,
-	"DOB"	TEXT,
-	"address"	TEXT,
-	"postcode"	TEXT,
-	"ReceptionistID"	TEXT,
-	PRIMARY KEY("ReceptionistID")
-);
-CREATE TABLE IF NOT EXISTS "Patient" (
-	"FirstName"	TEXT,
-	"Surname"	TEXT,
-	"Age"	INTEGER,
-	"Address"	TEXT,
-	"DOB"	TEXT,
-	"postcode"	TEXT,
-	"Gender"	TEXT,
-	"NHSNumber"	TEXT,
-  PRIMARY KEY("NHSNumber")
-);
-CREATE TABLE vaccines (
-    NHSNumber            INTEGER NOT NULL,
-    DoseNo               INTEGER NOT NULL,
-    VaccinationDate      DATE    NOT NULL,
-    VaccineManufacturer  TEXT    NOT NULL,
-    DiseaseTargeted      TEXT    NOT NULL,
-    VaccineType          TEXT    NOT NULL,
-    Product              TEXT    NOT NULL,
-    VaccineBatchNumber   TEXT    NOT NULL,
-    CountryOfVaccination TEXT    NOT NULL,
-    Authority            TEXT    NOT NULL,
-    Site                 TEXT    NOT NULL,
-    TotalSeriesOfDoses   INTEGER NOT NULL,
-    DisplayName          TEXT    NOT NULL,
-    SnomedCode           INTEGER NOT NULL,
-    DateEntered          DATE    NOT NULL,
-    ProcedureCode        INTEGER NOT NULL,
-    Booster              BOOLEAN NOT NULL,
-    PRIMARY KEY (
-        NHSNumber,
-        DoseNo
-    ),
-    FOREIGN KEY (
-        NHSNumber
-    )
-    REFERENCES patients (NHSNumber) 
-);
+// CREATE TABLE IF NOT EXISTS "Doctor" (
+// 	"FirstName"	TEXT,
+// 	"Surname"	TEXT,
+// 	"yearsAtSurgery"	TEXT,
+// 	"staffID"	TEXT,
+// 	"DOB"	TEXT,
+// 	"postcode"	TEXT,
+// 	"Full_Address"	TEXT,
+// 	"DoctorID"	TEXT,
+// 	"qualifications"	TEXT,
+// 	PRIMARY KEY("DoctorID")
+// );
+// CREATE TABLE IF NOT EXISTS "Receptionist" (
+// 	"FirstName"	TEXT,
+// 	"Surname"	TEXT,
+// 	"yearsAtSurgery"	TEXT,
+// 	"staffID"	TEXT,
+// 	"DOB"	TEXT,
+// 	"address"	TEXT,
+// 	"postcode"	TEXT,
+// 	"ReceptionistID"	TEXT,
+// 	PRIMARY KEY("ReceptionistID")
+// );
+// CREATE TABLE IF NOT EXISTS "Patient" (
+// 	"FirstName"	TEXT,
+// 	"Surname"	TEXT,
+// 	"Age"	INTEGER,
+// 	"Address"	TEXT,
+// 	"DOB"	TEXT,
+// 	"postcode"	TEXT,
+// 	"Gender"	TEXT,
+// 	"NHSNumber"	TEXT,
+//   PRIMARY KEY("NHSNumber")
+// );
+// CREATE TABLE vaccines (
+//     NHSNumber            INTEGER NOT NULL,
+//     DoseNo               INTEGER NOT NULL,
+//     VaccinationDate      DATE    NOT NULL,
+//     VaccineManufacturer  TEXT    NOT NULL,
+//     DiseaseTargeted      TEXT    NOT NULL,
+//     VaccineType          TEXT    NOT NULL,
+//     Product              TEXT    NOT NULL,
+//     VaccineBatchNumber   TEXT    NOT NULL,
+//     CountryOfVaccination TEXT    NOT NULL,
+//     Authority            TEXT    NOT NULL,
+//     Site                 TEXT    NOT NULL,
+//     TotalSeriesOfDoses   INTEGER NOT NULL,
+//     DisplayName          TEXT    NOT NULL,
+//     SnomedCode           INTEGER NOT NULL,
+//     DateEntered          DATE    NOT NULL,
+//     ProcedureCode        INTEGER NOT NULL,
+//     Booster              BOOLEAN NOT NULL,
+//     PRIMARY KEY (
+//         NHSNumber,
+//         DoseNo
+//     ),
+//     FOREIGN KEY (
+//         NHSNumber
+//     )
+//     REFERENCES patients (NHSNumber) 
+// );
 
-`
-    );
-}
+// `
+//     );
+// }

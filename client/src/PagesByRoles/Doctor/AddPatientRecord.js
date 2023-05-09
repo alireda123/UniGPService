@@ -10,7 +10,7 @@ function AddPatientRecord() {
       <Page beforeChildren={<BackLink href="/doctor">Back</BackLink>}>
 
         <H1>Add Medical Records</H1>
-        <hr class="govuk-section-break govuk-section-break--visible"></hr>
+        <hr className="govuk-section-break govuk-section-break--visible"></hr>
         <LeadParagraph>Search for a patient to be able to add a medical record</LeadParagraph>
 
       </Page>
