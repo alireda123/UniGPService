@@ -1,4 +1,4 @@
-import { Page,H1, LeadParagraph, BackLink} from "govuk-react";
+import { Page,H1, LeadParagraph,BackLink} from "govuk-react";
 import { useState } from "react";
 import axios from "axios"
 
@@ -8,10 +8,11 @@ function PatientAppointments() {
     <div className="doctorHome">
       <Page beforeChildren={<BackLink href="/doctor">Back</BackLink>}>
 
-        <H1>View your appointments</H1>
+        <H1>View your medical records</H1>
           <hr class="govuk-section-break govuk-section-break--visible"></hr>
-          <LeadParagraph>Below are your existing booked appointments. You can also cancel an appointment here.</LeadParagraph>
+          <LeadParagraph>Below is your previous medical history.</LeadParagraph>
           </Page>
+
     </div>
   );
 }

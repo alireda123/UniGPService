@@ -3,18 +3,15 @@ import { useState } from "react";
 import axios from "axios"
 import "./homepage.css";
 
-function DoctorAppointments() {
+function AddPatientRecord() {
 
   return (
     <div className="appointments">
       <Page beforeChildren={<BackLink href="/doctor">Back</BackLink>}>
 
-        <H1>View Appointments</H1>
+        <H1>Add Medical Records</H1>
         <hr class="govuk-section-break govuk-section-break--visible"></hr>
-        <LeadParagraph>Below are your appointments </LeadParagraph>
-        <Table>Date and time</Table>
-
-
+        <LeadParagraph>Search for a patient to be able to add a medical record</LeadParagraph>
 
       </Page>
 
@@ -22,4 +19,4 @@ function DoctorAppointments() {
   );
 }
 
-export default DoctorAppointments;
+export default AddPatientRecord;
